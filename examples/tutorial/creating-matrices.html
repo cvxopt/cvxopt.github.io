@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating matrices &mdash; CVXOPT</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5ffbd191"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Indexing of matrices" href="indexing.html" />
+    <link rel="prev" title="Examples" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CVXOPT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and license</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../download/index.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#tutorial-examples">Tutorial examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Creating matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indexing.html">Indexing of matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="numpy.html">Numpy and CVXOPT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp.html">Solving a linear program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="qp.html">Solving a quadratic program</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#book-examples">Book examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#custom-interior-point-solvers">Custom interior-point solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#other-examples">Other examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/index.html">Applications and extensions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CVXOPT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Creating matrices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creating-matrices">
+<h1>Creating matrices<a class="headerlink" href="#creating-matrices" title="Link to this heading"></a></h1>
+<p>CVXOPT has separate dense and sparse matrix objects.  This example
+illustrates different ways to create dense and sparse matrices.</p>
+<p>A dense matrix is created using the <code class="xref py py-func docutils literal notranslate"><span class="pre">matrix()</span></code> function;
+it can be created from a list (or iterator):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="go">[ 1.00e+00  3.00e+00  5.00e+00]</span>
+<span class="go">[ 2.00e+00  4.00e+00  6.00e+00]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">size</span>
+<span class="go">(2, 3)</span>
+</pre></div>
+</div>
+<p>or from a list of lists, where each inner list represents a column of the
+matrix:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">]</span> <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="go">[ 1.00e+00  3.00e+00]</span>
+<span class="go">[ 2.00e+00  4.00e+00]</span>
+</pre></div>
+</div>
+<p>More generally, the inner lists can represent block-columns.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">([</span> <span class="p">[</span><span class="n">A</span><span class="p">]</span> <span class="p">,[</span><span class="n">B</span><span class="p">]</span> <span class="p">]))</span>
+<span class="go">[ 1.00e+00  3.00e+00  5.00e+00  1.00e+00  3.00e+00]</span>
+<span class="go">[ 2.00e+00  4.00e+00  6.00e+00  2.00e+00  4.00e+00]</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">spmatrix()</span></code> function creates a sparse matrix from a (value, row,
+column) triplet description.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">spmatrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">spmatrix</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="go">[ 1.00e+00     0    ]</span>
+<span class="go">[    0      2.00e+00]</span>
+<span class="go">[    0         0    ]</span>
+<span class="go">[    0         0    ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+<span class="go">[ 1.00e+00  0.00e+00]</span>
+<span class="go">[ 0.00e+00  2.00e+00]</span>
+<span class="go">[ 0.00e+00  0.00e+00]</span>
+<span class="go">[ 0.00e+00  0.00e+00]</span>
+</pre></div>
+</div>
+<p>Sparse matrices can also be constructed by concatenating other matrices
+using the <code class="xref py py-func docutils literal notranslate"><span class="pre">sparse()</span></code> function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">sparse</span><span class="p">([</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="p">[</span><span class="n">D</span><span class="p">]</span> <span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="go">[ 1.00e+00  3.00e+00  1.00e+00     0    ]</span>
+<span class="go">[ 2.00e+00  4.00e+00     0      2.00e+00]</span>
+<span class="go">[ 1.00e+00  3.00e+00     0         0    ]</span>
+<span class="go">[ 2.00e+00  4.00e+00     0         0    ]</span>
+</pre></div>
+</div>
+<p>Sparse block-diagonal matrices can be constructed using the <code class="xref py py-func docutils literal notranslate"><span class="pre">spdiag()</span></code>
+function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">spdiag</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">spdiag</span><span class="p">([</span><span class="n">B</span><span class="p">,</span> <span class="o">-</span><span class="n">B</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
+<span class="go">[ 1.00e+00  3.00e+00     0         0         0         0    ]</span>
+<span class="go">[ 2.00e+00  4.00e+00     0         0         0         0    ]</span>
+<span class="go">[    0         0     -1.00e+00 -3.00e+00     0         0    ]</span>
+<span class="go">[    0         0     -2.00e+00 -4.00e+00     0         0    ]</span>
+<span class="go">[    0         0         0         0      1.00e+00     0    ]</span>
+<span class="go">[    0         0         0         0         0      2.00e+00]</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="indexing.html" class="btn btn-neutral float-right" title="Indexing of matrices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="../../copyright.html">Copyright</a> 2004-2024, Martin S. Andersen, Joachim Dahl, and Lieven Vandenberghe.
+      <span class="lastupdated">Last updated on Oct 23, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

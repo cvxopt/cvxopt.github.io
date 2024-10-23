@@ -1,0 +1,228 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optimal trade-off curve for a regularized least-squares problem (fig. 4.11) &mdash; CVXOPT</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5ffbd191"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Risk-return trade-off (fig. 4.12)" href="portfolio.html" />
+    <link rel="prev" title="Solving a quadratic program" href="../tutorial/qp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CVXOPT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and license</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../download/index.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tutorial-examples">Tutorial examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#book-examples">Book examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimal trade-off curve for a regularized least-squares problem (fig. 4.11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="portfolio.html">Risk-return trade-off (fig. 4.12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="penalties.html">Penalty function approximation (fig. 6.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="huber.html">Robust regression  (fig. 6.5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inputdesign.html">Input design (fig. 6.6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regsel.html">Sparse regressor selection (fig. 6.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smoothrec.html">Quadratic smoothing (fig. 6.8-6.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tv.html">Total variation reconstruction (fig. 6.11-6.14)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robls.html">Stochastic and worst-case robust approximation (fig. 6.15-6.16)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polapprox.html">Polynomial and spline fitting (fig. 6.19-6.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basispursuit.html">Basis pursuit (fig 6.21-6.23)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvxfit.html">Least-squares fit of a convex function (fig. 6.24)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consumerpref.html">Consumer preference analysis (fig. 6.25-6.26)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logreg.html">Logistic regression (fig. 7.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxent.html">Maximum entropy distribution (fig. 7.2-7.3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="probbounds.html">Chebyshev bounds (fig. 7.6-7.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chernoff.html">Chernoff lower bound (fig. 7.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expdesign.html">Experiment design (fig. 7.9-7.11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ellipsoids.html">Ellipsoidal approximations (fig. 8.3-8.4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centers.html">Centers of polyhedra (fig. 8.5-8.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linsep.html">Approximate linear discrimination (fig. 8.10-8.12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="placement.html">Linear, quadratic, and fourth-order placement (fig. 8.15-8.17)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="floorplan.html">Floor planning example (fig. 8.20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#custom-interior-point-solvers">Custom interior-point solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#other-examples">Other examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/index.html">Applications and extensions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CVXOPT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Optimal trade-off curve for a regularized least-squares problem (fig. 4.11)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="optimal-trade-off-curve-for-a-regularized-least-squares-problem-fig-4-11">
+<h1>Optimal trade-off curve for a regularized least-squares problem (fig. 4.11)<a class="headerlink" href="#optimal-trade-off-curve-for-a-regularized-least-squares-problem-fig-4-11" title="Link to this heading"></a></h1>
+<img alt="../../_images/fig-4-11.png" src="../../_images/fig-4-11.png" />
+<p><a class="reference download internal" download="" href="../../_downloads/6fb195d61a883874a99a4b69b1ba550a/rls.py"><code class="xref download docutils literal notranslate"><span class="pre">source</span> <span class="pre">code</span></code></a>, <a class="reference download internal" download="" href="../../_downloads/ae5082f8c98ecb01b98907b9b0cbea52/rls.bin"><code class="xref download docutils literal notranslate"><span class="pre">data</span> <span class="pre">file</span></code></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figure 4.11, page 185.</span>
+<span class="c1"># Regularized least-squares.</span>
+
+<span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">blas</span><span class="p">,</span> <span class="n">lapack</span><span class="p">,</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">solvers</span>
+<span class="n">solvers</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;show_progress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;rls.bin&quot;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">size</span>
+
+<span class="c1"># LS solution</span>
+<span class="n">xls</span> <span class="o">=</span> <span class="o">+</span><span class="n">b</span>
+<span class="n">lapack</span><span class="o">.</span><span class="n">gels</span><span class="p">(</span><span class="o">+</span><span class="n">A</span><span class="p">,</span> <span class="n">xls</span><span class="p">)</span>
+<span class="n">xls</span> <span class="o">=</span> <span class="n">xls</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+
+<span class="c1"># We compute the optimal values of</span>
+<span class="c1">#</span>
+<span class="c1">#     minimize/maximize  || A*x - b ||_2^2</span>
+<span class="c1">#     subject to         x&#39;*x = alpha</span>
+<span class="c1">#</span>
+<span class="c1"># via the duals.</span>
+<span class="c1">#</span>
+<span class="c1"># Lower bound:</span>
+<span class="c1">#</span>
+<span class="c1">#     maximize    -t - u*alpha</span>
+<span class="c1">#     subject to  [u*I, 0; 0, t] + [A, b]&#39;*[A, b] &gt;= 0</span>
+<span class="c1">#</span>
+<span class="c1"># Upper bound:</span>
+<span class="c1">#</span>
+<span class="c1">#     minimize    t + u*alpha</span>
+<span class="c1">#     subject to  [u*I, 0; 0, t] - [A, b]&#39;*[A, b] &gt;= 0.</span>
+<span class="c1">#</span>
+<span class="c1"># Two variables (t, u).</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">((</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">G</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>    <span class="c1"># coefficient of t</span>
+<span class="n">G</span><span class="p">[:</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span> <span class="p">:</span> <span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>    <span class="c1"># coefficient of u</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span> <span class="p">[</span> <span class="p">[</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">A</span><span class="p">,</span>  <span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">A</span> <span class="p">],</span> <span class="p">[</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">b</span> <span class="p">]</span> <span class="p">]</span> <span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">nopts</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">alpha1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="o">/</span><span class="p">(</span><span class="n">nopts</span><span class="o">//</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">alpha</span> <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nopts</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="p">]</span> <span class="o">+</span> \
+    <span class="p">[</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="p">(</span><span class="mf">15.0</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nopts</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">alpha</span> <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span>
+        <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nopts</span><span class="o">//</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">lbnds</span> <span class="o">=</span> <span class="p">[</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alpha1</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">alpha</span>
+    <span class="n">lbnds</span> <span class="o">+=</span> <span class="p">[</span> <span class="o">-</span><span class="n">blas</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">solvers</span><span class="o">.</span><span class="n">sdp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="p">[</span><span class="n">G</span><span class="p">],</span> <span class="n">hs</span><span class="o">=</span><span class="p">[</span><span class="n">h</span><span class="p">])[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="p">]</span>
+
+<span class="n">nopts</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">alpha2</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">nopts</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">alpha</span> <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nopts</span><span class="p">)</span> <span class="p">]</span>
+<span class="n">ubnds</span> <span class="o">=</span> <span class="p">[</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alpha2</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">alpha</span>
+    <span class="n">ubnds</span> <span class="o">+=</span> <span class="p">[</span> <span class="n">blas</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">solvers</span><span class="o">.</span><span class="n">sdp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="p">[</span><span class="n">G</span><span class="p">],</span> <span class="n">hs</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">])[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="p">]</span>
+
+<span class="k">try</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">pylab</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="k">pass</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lbnds</span><span class="p">,</span> <span class="n">alpha1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">ubnds</span><span class="p">,</span> <span class="n">alpha2</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+    <span class="n">kmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha1</span><span class="p">))</span> <span class="k">if</span> <span class="n">alpha1</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span>
+        <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">xls</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">])</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="p">[</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">]</span> <span class="o">+</span> <span class="n">lbnds</span><span class="p">[:</span><span class="n">kmax</span><span class="p">]</span> <span class="o">+</span>
+        <span class="p">[</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">xls</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha1</span><span class="p">[:</span><span class="n">kmax</span><span class="p">]</span> <span class="o">+</span>
+        <span class="p">[</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">xls</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">],</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">xls</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">xls</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;bo&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">lbnds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">ubnds</span> <span class="o">+</span> <span class="p">[</span><span class="n">ubnds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+        <span class="n">alpha1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha2</span><span class="o">+</span> <span class="p">[</span><span class="n">alpha1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;#D0D0D0&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;||A*x-b||_2^2&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;||x||_2^2&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Regularized least-squares (fig. 4.11)&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tutorial/qp.html" class="btn btn-neutral float-left" title="Solving a quadratic program" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="portfolio.html" class="btn btn-neutral float-right" title="Risk-return trade-off (fig. 4.12)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="../../copyright.html">Copyright</a> 2004-2024, Martin S. Andersen, Joachim Dahl, and Lieven Vandenberghe.
+      <span class="lastupdated">Last updated on Oct 23, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

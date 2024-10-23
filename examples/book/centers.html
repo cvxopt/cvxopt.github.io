@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centers of polyhedra (fig. 8.5-8.7) &mdash; CVXOPT</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5ffbd191"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Approximate linear discrimination (fig. 8.10-8.12)" href="linsep.html" />
+    <link rel="prev" title="Ellipsoidal approximations (fig. 8.3-8.4)" href="ellipsoids.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CVXOPT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and license</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../download/index.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tutorial-examples">Tutorial examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#book-examples">Book examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rls.html">Optimal trade-off curve for a regularized least-squares problem (fig. 4.11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="portfolio.html">Risk-return trade-off (fig. 4.12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="penalties.html">Penalty function approximation (fig. 6.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="huber.html">Robust regression  (fig. 6.5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inputdesign.html">Input design (fig. 6.6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regsel.html">Sparse regressor selection (fig. 6.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smoothrec.html">Quadratic smoothing (fig. 6.8-6.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tv.html">Total variation reconstruction (fig. 6.11-6.14)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robls.html">Stochastic and worst-case robust approximation (fig. 6.15-6.16)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="polapprox.html">Polynomial and spline fitting (fig. 6.19-6.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basispursuit.html">Basis pursuit (fig 6.21-6.23)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cvxfit.html">Least-squares fit of a convex function (fig. 6.24)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="consumerpref.html">Consumer preference analysis (fig. 6.25-6.26)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="logreg.html">Logistic regression (fig. 7.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="maxent.html">Maximum entropy distribution (fig. 7.2-7.3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="probbounds.html">Chebyshev bounds (fig. 7.6-7.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chernoff.html">Chernoff lower bound (fig. 7.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="expdesign.html">Experiment design (fig. 7.9-7.11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ellipsoids.html">Ellipsoidal approximations (fig. 8.3-8.4)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Centers of polyhedra (fig. 8.5-8.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linsep.html">Approximate linear discrimination (fig. 8.10-8.12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="placement.html">Linear, quadratic, and fourth-order placement (fig. 8.15-8.17)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="floorplan.html">Floor planning example (fig. 8.20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#custom-interior-point-solvers">Custom interior-point solvers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#other-examples">Other examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/index.html">Applications and extensions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CVXOPT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Centers of polyhedra (fig. 8.5-8.7)</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="centers-of-polyhedra-fig-8-5-8-7">
+<h1>Centers of polyhedra (fig. 8.5-8.7)<a class="headerlink" href="#centers-of-polyhedra-fig-8-5-8-7" title="Link to this heading"></a></h1>
+<img alt="../../_images/fig-8-5.png" src="../../_images/fig-8-5.png" />
+<img alt="../../_images/fig-8-6.png" src="../../_images/fig-8-6.png" />
+<img alt="../../_images/fig-8-7.png" src="../../_images/fig-8-7.png" />
+<p><a class="reference download internal" download="" href="../../_downloads/37e398394eac2ba64d27afed043e8a59/centers.py"><code class="xref download docutils literal notranslate"><span class="pre">source</span> <span class="pre">code</span></code></a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figures 8.5-7, pages 417-421.</span>
+<span class="c1"># Centers of polyhedra.</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">pi</span>
+<span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">blas</span><span class="p">,</span> <span class="n">lapack</span><span class="p">,</span> <span class="n">solvers</span>
+<span class="kn">from</span> <span class="nn">cvxopt</span> <span class="kn">import</span> <span class="n">matrix</span><span class="p">,</span> <span class="n">spdiag</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">log</span>
+<span class="kn">from</span> <span class="nn">cvxopt.modeling</span> <span class="kn">import</span> <span class="n">variable</span><span class="p">,</span> <span class="n">op</span>
+<span class="n">solvers</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;show_progress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">try</span><span class="p">:</span> <span class="kn">import</span> <span class="nn">pylab</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="n">pylab_installed</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">else</span><span class="p">:</span> <span class="n">pylab_installed</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Extreme points (with first one appended at the end)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span> <span class="mf">0.55</span><span class="p">,</span>  <span class="mf">0.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.20</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span>  <span class="mf">0.00</span><span class="p">,</span>  <span class="mf">0.40</span><span class="p">,</span>  <span class="mf">0.55</span><span class="p">,</span>
+             <span class="mf">0.00</span><span class="p">,</span>  <span class="mf">0.35</span><span class="p">,</span>  <span class="mf">0.20</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.10</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.30</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.20</span><span class="p">,</span>  <span class="mf">0.00</span> <span class="p">],</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># Inequality description G*x &lt;= h with h = 1</span>
+<span class="n">G</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">G</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">[:</span><span class="n">m</span><span class="p">,:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:])</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)[::</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">mul</span><span class="p">(</span><span class="n">h</span><span class="p">[:,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span><span class="o">**-</span><span class="mi">1</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+
+<span class="c1"># Chebyshev center</span>
+<span class="c1">#</span>
+<span class="c1"># maximizse   R</span>
+<span class="c1"># subject to  gk&#39;*xc + R*||gk||_2 &lt;= hk,  k=1,...,m</span>
+<span class="c1">#             R &gt;= 0</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">variable</span><span class="p">()</span>
+<span class="n">xc</span> <span class="o">=</span> <span class="n">variable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">op</span><span class="p">(</span><span class="o">-</span><span class="n">R</span><span class="p">,</span> <span class="p">[</span> <span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span><span class="o">*</span><span class="n">xc</span> <span class="o">+</span> <span class="n">R</span><span class="o">*</span><span class="n">blas</span><span class="o">.</span><span class="n">nrm2</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,:])</span> <span class="o">&lt;=</span> <span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="p">]</span> <span class="o">+</span>
+    <span class="p">[</span> <span class="n">R</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">value</span>
+<span class="n">xc</span> <span class="o">=</span> <span class="n">xc</span><span class="o">.</span><span class="n">value</span>
+
+<span class="k">if</span> <span class="n">pylab_installed</span><span class="p">:</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="c1"># polyhedron</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],:]</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="n">k</span><span class="p">],:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],:])</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edge</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># 1000 points on the unit circle</span>
+    <span class="n">nopts</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span> <span class="p">[</span> <span class="n">a</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">nopts</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nopts</span><span class="p">)</span> <span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nopts</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">circle</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">nopts</span><span class="p">))</span>
+    <span class="n">circle</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">circle</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">R</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">),</span> <span class="n">R</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
+    <span class="n">circle</span> <span class="o">+=</span> <span class="n">xc</span><span class="p">[:,</span><span class="n">nopts</span><span class="o">*</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="c1"># plot maximum inscribed disk</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">circle</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">circle</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;#F0F0F0&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xc</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xc</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Chebyshev center (fig 8.5)&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Maximum volume enclosed ellipsoid center</span>
+<span class="c1">#</span>
+<span class="c1"># minimize    -log det B</span>
+<span class="c1"># subject to  ||B * gk||_2 + gk&#39;*c &lt;= hk,  k=1,...,m</span>
+<span class="c1">#</span>
+<span class="c1"># with variables  B and c.</span>
+<span class="c1">#</span>
+<span class="c1"># minimize    -log det L</span>
+<span class="c1"># subject to  ||L&#39; * gk||_2^2 / (hk - gk&#39;*c) &lt;= hk - gk&#39;*c,  k=1,...,m</span>
+<span class="c1">#</span>
+<span class="c1"># L lower triangular with positive diagonal and B*B = L*L&#39;.</span>
+<span class="c1">#</span>
+<span class="c1"># minimize    -log x[0] - log x[2]</span>
+<span class="c1"># subject to   g( Dk*x + dk ) &lt;= 0,  k=1,...,m</span>
+<span class="c1">#</span>
+<span class="c1"># g(u,t) = u&#39;*u/t - t</span>
+<span class="c1"># Dk = [ G[k,0]   G[k,1]  0       0        0</span>
+<span class="c1">#        0        0       G[k,1]  0        0</span>
+<span class="c1">#        0        0       0      -G[k,0]  -G[k,1] ]</span>
+<span class="c1"># dk = [0; 0; h[k]]</span>
+<span class="c1">#</span>
+<span class="c1"># 5 variables x = (L[0,0], L[1,0], L[1,1], c[0], c[1])</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="p">[</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">][</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span> <span class="p">]</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span> <span class="p">[</span><span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+        <span class="o">-</span><span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">G</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span> <span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="n">matrix</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">hk</span><span class="p">])</span> <span class="k">for</span> <span class="n">hk</span> <span class="ow">in</span> <span class="n">h</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">matrix</span><span class="p">([</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">])</span>
+    <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">G</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">:]))</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span> <span class="n">Dk</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">dk</span> <span class="k">for</span> <span class="n">Dk</span><span class="p">,</span> <span class="n">dk</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="p">]</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">Df</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">Df</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Df</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># gradient of g is ( 2.0*(u/t);  -(u/t)&#39;*(u/t) -1)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">gradg</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">gradg</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">gradg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">a</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">Df</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span>  <span class="n">gradg</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">Df</span>
+
+    <span class="n">H</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">H</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="c1"># Hessian of g is (2.0/t) * [ I, -u/t;  -(u/t)&#39;,  (u/t)*(u/t)&#39; ]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">hessg</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+        <span class="n">hessg</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">hessg</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span>
+        <span class="n">hessg</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">hessg</span><span class="p">[</span><span class="mi">2</span><span class="p">,:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span>  <span class="o">-</span><span class="n">a</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">hessg</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">a</span>
+        <span class="n">H</span> <span class="o">+=</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">y</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span>  <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">hessg</span> <span class="o">*</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">Df</span><span class="p">,</span> <span class="n">H</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="mi">4</span><span class="p">]])</span>
+
+<span class="k">if</span> <span class="n">pylab_installed</span><span class="p">:</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="c1"># polyhedron</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],:]</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="n">k</span><span class="p">],:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],:])</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edge</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># 1000 points on the unit circle</span>
+    <span class="n">nopts</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span> <span class="p">[</span> <span class="n">a</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">nopts</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nopts</span><span class="p">)</span> <span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nopts</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">circle</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">nopts</span><span class="p">))</span>
+    <span class="n">circle</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">circle</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
+
+    <span class="c1"># ellipse = L * circle + c</span>
+    <span class="n">ellipse</span> <span class="o">=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">circle</span> <span class="o">+</span> <span class="n">c</span><span class="p">[:,</span> <span class="n">nopts</span><span class="o">*</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="n">pylab</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">ellipse</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ellipse</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;#F0F0F0&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Maximum volume inscribed ellipsoid center (fig 8.6)&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Analytic center.</span>
+<span class="c1">#</span>
+<span class="c1"># minimize  -sum log (h-G*x)</span>
+<span class="c1">#</span>
+
+<span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">h</span><span class="o">-</span><span class="n">G</span><span class="o">*</span><span class="n">x</span>
+    <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="n">Df</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">**-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">G</span>
+    <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">matrix</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">Df</span>
+    <span class="n">H</span> <span class="o">=</span>  <span class="n">G</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">spdiag</span><span class="p">(</span><span class="n">y</span><span class="o">**-</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">G</span>
+    <span class="k">return</span> <span class="n">matrix</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">Df</span><span class="p">,</span> <span class="n">z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">H</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solvers</span><span class="o">.</span><span class="n">cp</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+<span class="n">xac</span> <span class="o">=</span> <span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<span class="n">Hac</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">spdiag</span><span class="p">((</span><span class="n">h</span><span class="o">-</span><span class="n">G</span><span class="o">*</span><span class="n">xac</span><span class="p">)</span><span class="o">**-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">G</span>
+
+<span class="k">if</span> <span class="n">pylab_installed</span><span class="p">:</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="c1"># polyhedron</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],:]</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">matrix</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="n">k</span><span class="p">],:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">],:])</span>
+        <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edge</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+
+    <span class="c1"># 1000 points on the unit circle</span>
+    <span class="n">nopts</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span> <span class="p">[</span> <span class="n">a</span><span class="o">*</span><span class="mf">2.0</span><span class="o">*</span><span class="n">pi</span><span class="o">/</span><span class="n">nopts</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nopts</span><span class="p">)</span> <span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nopts</span><span class="p">)</span> <span class="p">)</span>
+    <span class="n">circle</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">nopts</span><span class="p">))</span>
+    <span class="n">circle</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">circle</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">angles</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span>
+
+    <span class="c1"># ellipse = L^-T * circle + xc  where Hac = L*L&#39;</span>
+    <span class="n">lapack</span><span class="o">.</span><span class="n">potrf</span><span class="p">(</span><span class="n">Hac</span><span class="p">)</span>
+    <span class="n">ellipse</span> <span class="o">=</span> <span class="o">+</span><span class="n">circle</span>
+    <span class="n">blas</span><span class="o">.</span><span class="n">trsm</span><span class="p">(</span><span class="n">Hac</span><span class="p">,</span> <span class="n">ellipse</span><span class="p">,</span> <span class="n">transA</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+    <span class="n">ellipse</span> <span class="o">+=</span> <span class="n">xac</span><span class="p">[:,</span> <span class="n">nopts</span><span class="o">*</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">ellipse</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ellipse</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;#F0F0F0&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xac</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">xac</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+
+    <span class="n">pylab</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Analytic center (fig 8.7)&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">pylab</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ellipsoids.html" class="btn btn-neutral float-left" title="Ellipsoidal approximations (fig. 8.3-8.4)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="linsep.html" class="btn btn-neutral float-right" title="Approximate linear discrimination (fig. 8.10-8.12)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="../../copyright.html">Copyright</a> 2004-2024, Martin S. Andersen, Joachim Dahl, and Lieven Vandenberghe.
+      <span class="lastupdated">Last updated on Oct 23, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

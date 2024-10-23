@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; CVXOPT</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5ffbd191"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Creating matrices" href="tutorial/creating-matrices.html" />
+    <link rel="prev" title="Documentation" href="../documentation/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CVXOPT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">Copyright and license</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download/index.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/index.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-examples">Tutorial examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/creating-matrices.html">Creating matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/indexing.html">Indexing of matrices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/numpy.html">Numpy and CVXOPT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/lp.html">Solving a linear program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tutorial/qp.html">Solving a quadratic program</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#book-examples">Book examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="book/rls.html">Optimal trade-off curve for a regularized least-squares problem (fig. 4.11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/portfolio.html">Risk-return trade-off (fig. 4.12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/penalties.html">Penalty function approximation (fig. 6.2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/huber.html">Robust regression  (fig. 6.5)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/inputdesign.html">Input design (fig. 6.6)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/regsel.html">Sparse regressor selection (fig. 6.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/smoothrec.html">Quadratic smoothing (fig. 6.8-6.10)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/tv.html">Total variation reconstruction (fig. 6.11-6.14)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/robls.html">Stochastic and worst-case robust approximation (fig. 6.15-6.16)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/polapprox.html">Polynomial and spline fitting (fig. 6.19-6.20)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/basispursuit.html">Basis pursuit (fig 6.21-6.23)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/cvxfit.html">Least-squares fit of a convex function (fig. 6.24)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/consumerpref.html">Consumer preference analysis (fig. 6.25-6.26)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/logreg.html">Logistic regression (fig. 7.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/maxent.html">Maximum entropy distribution (fig. 7.2-7.3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/probbounds.html">Chebyshev bounds (fig. 7.6-7.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/chernoff.html">Chernoff lower bound (fig. 7.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/expdesign.html">Experiment design (fig. 7.9-7.11)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/ellipsoids.html">Ellipsoidal approximations (fig. 8.3-8.4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/centers.html">Centers of polyhedra (fig. 8.5-8.7)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/linsep.html">Approximate linear discrimination (fig. 8.10-8.12)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/placement.html">Linear, quadratic, and fourth-order placement (fig. 8.15-8.17)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="book/floorplan.html">Floor planning example (fig. 8.20)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-interior-point-solvers">Custom interior-point solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mlbook/l1.html">L1-norm approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlbook/l1regls.html">L1-norm regularized least-squares</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlbook/mcsvm.html">Multiclass SVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlbook/robsvm.html">Robust SVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mlbook/ubsdp.html">SDPs with upper bounds</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utility-functions">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-examples">Other examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="other/embed_cvxopt.html">Using CVXOPT from C</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../applications/index.html">Applications and extensions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CVXOPT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h1>
+<section id="tutorial-examples">
+<h2>Tutorial examples<a class="headerlink" href="#tutorial-examples" title="Link to this heading"></a></h2>
+<p>Short examples that illustrate basic features of CVXOPT.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/creating-matrices.html">Creating matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/indexing.html">Indexing of matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/numpy.html">Numpy and CVXOPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/lp.html">Solving a linear program</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/qp.html">Solving a quadratic program</a></li>
+</ul>
+</div>
+</section>
+<section id="book-examples">
+<h2>Book examples<a class="headerlink" href="#book-examples" title="Link to this heading"></a></h2>
+<p>Examples from the book
+<a class="reference external" href="http://www.stanford.edu/~boyd/cvxbook">Convex Optimization</a> by Boyd
+and Vandenberghe.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="book/rls.html">Optimal trade-off curve for a regularized least-squares problem (fig. 4.11)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/portfolio.html">Risk-return trade-off (fig. 4.12)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/penalties.html">Penalty function approximation (fig. 6.2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/huber.html">Robust regression  (fig. 6.5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/inputdesign.html">Input design (fig. 6.6)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/regsel.html">Sparse regressor selection (fig. 6.7)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/smoothrec.html">Quadratic smoothing (fig. 6.8-6.10)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/tv.html">Total variation reconstruction (fig. 6.11-6.14)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/robls.html">Stochastic and worst-case robust approximation (fig. 6.15-6.16)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/polapprox.html">Polynomial and spline fitting (fig. 6.19-6.20)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/basispursuit.html">Basis pursuit (fig 6.21-6.23)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/cvxfit.html">Least-squares fit of a convex function (fig. 6.24)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/consumerpref.html">Consumer preference analysis (fig. 6.25-6.26)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/logreg.html">Logistic regression (fig. 7.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/maxent.html">Maximum entropy distribution (fig. 7.2-7.3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/probbounds.html">Chebyshev bounds (fig. 7.6-7.7)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/chernoff.html">Chernoff lower bound (fig. 7.8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/expdesign.html">Experiment design (fig. 7.9-7.11)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/ellipsoids.html">Ellipsoidal approximations (fig. 8.3-8.4)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/centers.html">Centers of polyhedra (fig. 8.5-8.7)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/linsep.html">Approximate linear discrimination (fig. 8.10-8.12)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/placement.html">Linear, quadratic, and fourth-order placement (fig. 8.15-8.17)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="book/floorplan.html">Floor planning example (fig. 8.20)</a></li>
+</ul>
+</div>
+</section>
+<section id="custom-interior-point-solvers">
+<h2>Custom interior-point solvers<a class="headerlink" href="#custom-interior-point-solvers" title="Link to this heading"></a></h2>
+<p>Examples from the book chapter
+<a class="reference external" href="http://www.ee.ucla.edu/~vandenbe/publications/mlbook.pdf">Interior-point methods for large-scale cone programming</a> (pdf) by M. S. Andersen, J. Dahl, Z. Liu, L. Vandenberghe; in: S. Sra, S. Nowozin, S. J. Wright (Editors) Optimization for Machine Learning, MIT Press, 2011.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mlbook/l1.html">L1-norm approximation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1.html#l1"><code class="docutils literal notranslate"><span class="pre">l1()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1.html#l1blas"><code class="docutils literal notranslate"><span class="pre">l1blas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1.html#l1mosek"><code class="docutils literal notranslate"><span class="pre">l1mosek()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1.html#l1mosek2"><code class="docutils literal notranslate"><span class="pre">l1mosek2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mlbook/l1regls.html">L1-norm regularized least-squares</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1regls.html#l1regls"><code class="docutils literal notranslate"><span class="pre">l1regls()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1regls.html#l1regls_mosek"><code class="docutils literal notranslate"><span class="pre">l1regls_mosek()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/l1regls.html#l1regls_mosek2"><code class="docutils literal notranslate"><span class="pre">l1regls_mosek2()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mlbook/mcsvm.html">Multiclass SVM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/mcsvm.html#mcsvm"><code class="docutils literal notranslate"><span class="pre">mcsvm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mlbook/robsvm.html">Robust SVM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/robsvm.html#robsvm"><code class="docutils literal notranslate"><span class="pre">robsvm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mlbook/ubsdp.html">SDPs with upper bounds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mlbook/ubsdp.html#ubsdp"><code class="docutils literal notranslate"><span class="pre">ubsdp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The code for nuclear norm approximation can be found <a class="reference internal" href="../applications/nucnrm/index.html"><span class="doc">here</span></a>.</p>
+</section>
+<section id="utility-functions">
+<h2>Utility functions<a class="headerlink" href="#utility-functions" title="Link to this heading"></a></h2>
+<p>Useful Python scripts that are not included in the distribution.</p>
+<ul class="simple">
+<li><p>Generating random sparse matrices (<a class="reference download internal" download="" href="../_downloads/4263de3faa286c5f6467fe58256134ef/sprandmtrx.py"><code class="xref download docutils literal notranslate"><span class="pre">sprandmtrx.py</span></code></a>)</p></li>
+<li><p>Reading and writing Matlab mat-files (<a class="reference download internal" download="" href="../_downloads/50c2f14ac51a0b8a35a348cd8ebe655a/matfile.py"><code class="xref download docutils literal notranslate"><span class="pre">matfile.py</span></code></a>; Python 2.7 only)</p></li>
+</ul>
+</section>
+<section id="other-examples">
+<h2>Other examples<a class="headerlink" href="#other-examples" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="other/embed_cvxopt.html">Using CVXOPT from C</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../documentation/index.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial/creating-matrices.html" class="btn btn-neutral float-right" title="Creating matrices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="../copyright.html">Copyright</a> 2004-2024, Martin S. Andersen, Joachim Dahl, and Lieven Vandenberghe.
+      <span class="lastupdated">Last updated on Oct 23, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

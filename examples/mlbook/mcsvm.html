@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multiclass SVM &mdash; CVXOPT</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5ffbd191"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="Robust SVM" href="robsvm.html" />
+    <link rel="prev" title="L1-norm regularized least-squares" href="l1regls.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CVXOPT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">Copyright and license</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../download/index.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tutorial-examples">Tutorial examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#book-examples">Book examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#custom-interior-point-solvers">Custom interior-point solvers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="l1.html">L1-norm approximation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="l1regls.html">L1-norm regularized least-squares</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Multiclass SVM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mcsvm"><code class="docutils literal notranslate"><span class="pre">mcsvm()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="robsvm.html">Robust SVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ubsdp.html">SDPs with upper bounds</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#other-examples">Other examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../applications/index.html">Applications and extensions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CVXOPT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Multiclass SVM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="multiclass-svm">
+<h1>Multiclass SVM<a class="headerlink" href="#multiclass-svm" title="Link to this heading"></a></h1>
+<p>Crammer and Singer (2001) have extended the binary SVM classifier to
+classification problems with more than two classes. The training
+problem of the Crammer-Singer multiclass SVM can be expressed as a QP</p>
+<div class="math notranslate nohighlight" id="equation-multiclass-svm">
+<span class="eqno">(1)<a class="headerlink" href="#equation-multiclass-svm" title="Link to this equation"></a></span>\[\begin{split}\begin{array}{ll}
+\mbox{maximize}   &amp;  -(1/2)  \mathbf{Tr}(U^TQU)  + \mathbf{Tr}(E^TU) \\
+\mbox{subject to} &amp; U \preceq \gamma E \\
+                  &amp; U \mathbf{1}_m = 0
+\end{array}\end{split}\]</div>
+<p>with variable <span class="math notranslate nohighlight">\(U \in \mathbf{R}^{N \times m}\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is
+the number of training examples and <span class="math notranslate nohighlight">\(m\)</span> the number of
+classes. The <span class="math notranslate nohighlight">\(N \times N\)</span> kernel matrix <span class="math notranslate nohighlight">\(Q\)</span> is given by
+<span class="math notranslate nohighlight">\(Q_{ij} = K(x_i, x_j)\)</span> where <span class="math notranslate nohighlight">\(K\)</span> is a kernel function and
+<span class="math notranslate nohighlight">\(x_i^T\)</span> is the i’th row of the <span class="math notranslate nohighlight">\(N \times n\)</span> data matrix
+<span class="math notranslate nohighlight">\(X\)</span>, and <span class="math notranslate nohighlight">\(d\)</span> is an <span class="math notranslate nohighlight">\(N\)</span>-vector with labels (<em>i.e.</em>
+<span class="math notranslate nohighlight">\(d_i \in \{ 0,1,\ldots,m-1 \}\)</span>).</p>
+<h3> Documentation </h3><p>A custom solver for the multiclass support vector machine training
+problem is available as a Python module <a class="reference download internal" download="" href="../../_downloads/959985f7a274f2f29998baf5f3de67f7/mcsvm.py"><code class="xref download docutils literal notranslate"><span class="pre">mcsvm</span></code></a>. The module
+implements the following function:</p>
+<blockquote>
+<div><dl class="py function">
+<dt class="sig sig-object py" id="mcsvm">
+<span class="sig-name descname"><span class="pre">mcsvm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kernel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcsvm" title="Link to this definition"></a></dt>
+<dd><p>Solves the problem <a class="reference internal" href="#equation-multiclass-svm">(1)</a> using a custom KKT solver.</p>
+<p>The input arguments are the data matrix <span class="math notranslate nohighlight">\(X\)</span> (with the
+<span class="math notranslate nohighlight">\(N\)</span> training examples <span class="math notranslate nohighlight">\(x_i^T\)</span> as rows), the label
+vector <span class="math notranslate nohighlight">\(d\)</span>, and the positive parameter <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
+<p>Valid kernel functions are:</p>
+<dl class="simple">
+<dt><code class="xref py py-const docutils literal notranslate"><span class="pre">'linear'</span></code></dt><dd><p>the linear kernel: <span class="math notranslate nohighlight">\(K(x_i,x_j) = x_i^Tx_j\)</span></p>
+</dd>
+<dt><code class="xref py py-const docutils literal notranslate"><span class="pre">'poly'</span></code></dt><dd><p>the polynomial kernel: <span class="math notranslate nohighlight">\(K(x_i,x_j) = (x_i^Tx_j/\sigma)^d\)</span></p>
+</dd>
+</dl>
+<p>The kernel parameters <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(d\)</span> are specified
+using the input arguments <cite>sigma</cite> and <cite>degree</cite>, respectively.</p>
+<p>Returns the function <code class="xref py py-func docutils literal notranslate"><span class="pre">classifier()</span></code>.  If <span class="math notranslate nohighlight">\(Y\)</span> is
+<span class="math notranslate nohighlight">\(M \times n\)</span> then <cite>classifier(Y)</cite> returns a list with as
+its k’th element</p>
+<div class="math notranslate nohighlight">
+\[\operatorname*{arg\,max}_{j=0,\ldots,m-1}  \sum_{i=1}^N U_{ij} K(x_i, y_k)\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_k^T\)</span> is row <span class="math notranslate nohighlight">\(k\)</span> of <span class="math notranslate nohighlight">\(Y\)</span>, <span class="math notranslate nohighlight">\(x_i^T\)</span>
+is row <span class="math notranslate nohighlight">\(k\)</span> of <span class="math notranslate nohighlight">\(X\)</span>, and <span class="math notranslate nohighlight">\(U\)</span> is the optimal
+solution of the QP <a class="reference internal" href="#equation-multiclass-svm">(1)</a>.</p>
+</dd></dl>
+
+</div></blockquote>
+<span class="target" id="mlbook-robust-svm"></span></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="l1regls.html" class="btn btn-neutral float-left" title="L1-norm regularized least-squares" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="robsvm.html" class="btn btn-neutral float-right" title="Robust SVM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="../../copyright.html">Copyright</a> 2004-2024, Martin S. Andersen, Joachim Dahl, and Lieven Vandenberghe.
+      <span class="lastupdated">Last updated on Oct 23, 2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
