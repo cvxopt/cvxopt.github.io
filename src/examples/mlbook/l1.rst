@@ -1,0 +1,90 @@
+.. role: raw-html(raw)
+   :format: html
+
+L1-norm approximation 
+"""""""""""""""""""""
+
+The :math:`\ell_1`-norm approximation problem is given by
+
+.. math:: :label: l1approx
+
+   \begin{array}{ll}	
+   \mbox{minimize}   &  \| Pu - q \|_1 
+   \end{array}
+
+with variable :math:`u \in \mathbf{R}^n` and problem data :math:`P \in \mathbf{R}^{m \times n}` and :math:`q \in
+\mathbf{R}^m`. The problem is equivalent to an LP 
+
+.. math:: :label: l1approx_lp
+
+   \begin{array}{ll}	
+   \mbox{minimize}   & \mathbf{1}^Tv \\
+   \mbox{subject to} &  \begin{bmatrix} P & -I\\ -P & - I \end{bmatrix} 
+		       \begin{bmatrix} u \\ v \end{bmatrix} 
+		       \preceq
+		       \begin{bmatrix} q \\ -q \end{bmatrix} 
+   \end{array}    
+
+with :math:`m + n` variables and :math:`2m` constraints. Yet another
+equivalent formulation is the problem
+
+.. math:: :label: l1approx_lp2
+
+   \begin{array}{ll}	
+   \mbox{minimize}   & e^Ts + e^Tt \\
+   \mbox{subject to} &  Pu - q = s - t \\
+                     & s, t \geq 0
+   \end{array}
+
+with variables :math:`u \in \mathbf{R}^n`, :math:`s \in \mathbf{R}^m`, and :math:`t \in \mathbf{R}^m`.
+
+.. raw:: html
+
+   <h3> Documentation </h3>
+
+A custom solver for the :math:`\ell_1`-norm approximation problem is
+available as a Python module :download:`l1.py <l1.py>` (or :download:`l1_mosek6.py <l1_mosek6.py>` or :download:`l1_mosek7.py <l1_mosek7.py>` for earlier
+versions of CVXOPT that use either MOSEK 6 or 7). The module implements
+the following four functions:
+
+   .. function:: l1(P, q)
+
+      Solves the problem :eq:`l1approx_lp` using a custom KKT solver.
+
+      Returns the solution :math:`u`. 
+
+   .. function:: l1blas(P, q)
+
+      Solves the problem :eq:`l1approx_lp` using a custom KKT solver. This
+      function implements the same custom KKT solver as :func:`l1`, but it
+      uses BLAS routines instead of overloaded arithmetic.
+
+      Returns the solution :math:`u`. 
+
+   .. function:: l1mosek(P, q)
+
+      Solves the problem :eq:`l1approx_lp` using MOSEK. This function
+      is only available if MOSEK is installed.
+
+      Returns the solution :math:`u`.
+
+   .. function:: l1mosek2(P, q)   
+
+      Solves the problem :eq:`l1approx_lp2` using MOSEK. This function
+      is only available if MOSEK is installed.
+   
+      Returns the solution :math:`u`.   
+
+.. raw:: html
+
+   <h3> Example </h3>
+
+::
+
+  from l1 import l1
+  from cvxopt import normal
+
+  m, n = 500, 100 
+  P, q = normal(m,n), normal(m,1)
+  u = l1(P,q)
+
